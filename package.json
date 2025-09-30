@@ -1,0 +1,21 @@
+{
+  "name": "space-apps-nasa-2025-api",
+  "version": "1.0.0",
+  "description": "API Space Apps Nasa Hackathon",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node --watch server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "bcrypt": "6.0.0",
+    "cookie-parser": "1.4.7",
+    "dotenv": "17.2.1",
+    "express": "5.1.0",
+    "mongoose": "8.18.0",
+    "nodemailer": "7.0.6"
+  }
+}
