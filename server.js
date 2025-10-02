@@ -1,5 +1,6 @@
 import cookieParser from "cookie-parser";
 import express from "express";
+import cors from "cors";
 import config from "./src/config/config.js";
 import connectDB from "./src/libs/conn.js";
 import authRouter from "./src/routes/auth.route.js";
@@ -8,6 +9,7 @@ import dataRouter from "./src/routes/data.route.js";
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
