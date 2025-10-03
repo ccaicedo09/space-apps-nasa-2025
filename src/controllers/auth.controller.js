@@ -61,3 +61,12 @@ export const logout = (req, res) => {
   res.clearCookie("_id_user");
   res.send({ message: "logout successfully!" });
 }
+
+export const checkAuth = async (req, res) => {
+  const userId = req.cookies._id_user;
+  
+  if (!userId) return res.status(200).json({ authenticated: false });
+  const userExists = await User.exists({ _id: userId });
+  
+  res.status(200).json({ authenticated: !!userExists });
+};
