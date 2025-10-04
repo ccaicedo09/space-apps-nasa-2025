@@ -1,7 +1,4 @@
-import mongoose from "mongoose";
 import Dataset from "../models/dataset.model.js";
-import userModel from "../models/user.model.js";
-import { getValidUserIdFromCookie } from "../utils/getUserFromCookie.js";
 
 export const getData = async (req, res) => {
     try {
