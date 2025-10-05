@@ -59,7 +59,9 @@ export const generateDescriptionImg = async (data) => {
             - Created at: ${created_at ?? "unknown"}
             - Center coordinates: ${center ?? "unknown"}
 
-            Keep the explanation concise, accurate, and easy for anyone to understand. Focus on what is visible and its scientific or historical relevance. Avoid unnecessary technical terms or phrases like "this image shows" or "the picture displays".`
+            Keep the explanation concise, accurate, and easy for anyone to understand. Focus on what is visible and its scientific or historical relevance. Avoid unnecessary technical terms or phrases like "this image shows" or "the picture displays".
+
+            Respond strictly in **English only**.`
         });
 
 
