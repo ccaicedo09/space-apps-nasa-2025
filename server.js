@@ -2,7 +2,7 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import cors from "cors";
 import config from "./src/config/config.js";
-import connectDB from "./src/libs/conn.js";
+import connectDB from "./src/config/conn.js";
 import dataRouter from "./src/routes/data.route.js";
 import aiRouter from "./src/routes/ai.route.js";
 

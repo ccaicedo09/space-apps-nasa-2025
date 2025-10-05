@@ -23,7 +23,7 @@ function requestWithProtocol(u, options, onResponse) {
   return (u.protocol === "http:" ? http : https).get(u, options, onResponse);
 }
 
-export async function descargarImagenIgnorandoCertificado(url, maxRedirects = 5) {
+export async function descargarImagenIgnorandoCertificado(url, maxRedirects = 3) {
   return new Promise((resolve, reject) => {
     const startUrl = new URL(url);
     const filePath = path.join(tmpdir(), `imagen-${Date.now()}.jpg`);
@@ -71,6 +71,8 @@ export async function descargarImagenIgnorandoCertificado(url, maxRedirects = 5)
 
         // Escribimos a archivo temporal
         const fileStream = fs.createWriteStream(filePath);
+        console.log("Downloading image from:", currentUrl.href);
+        console.log("Saving to:", filePath);
         res.pipe(fileStream);
 
         fileStream.on("finish", () => {

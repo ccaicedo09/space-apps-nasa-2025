@@ -1,3 +1,4 @@
+import { generateDescriptionImg } from "../libs/aiClient.js";
 import Dataset from "../models/dataset.model.js";
 
 export const getData = async (req, res) => {
@@ -75,6 +76,17 @@ export const getData = async (req, res) => {
     ]);
 
     const totalPage = Math.ceil(totalData / limit);
+
+    for(const item of data) {
+      console.log(item);
+
+      if (!item.description_image) {
+        const { text : description, isTransformText } = await generateDescriptionImg(item);
+        console.log("Generated description:", description);
+        item.description_image = description;
+        if (isTransformText) await item.save();
+      }
+    }
 
     return res.json({
       page: Number(page),
