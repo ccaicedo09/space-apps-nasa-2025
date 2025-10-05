@@ -1,0 +1,16 @@
+services:
+  nasa-api:
+    build: .
+    container_name: nasa-api-service
+    ports: 
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    networks:
+      - nasa-networks
+
+networks:
+  nasa-networks:
