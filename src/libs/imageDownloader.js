@@ -71,6 +71,8 @@ export async function descargarImagenIgnorandoCertificado(url, maxRedirects = 5)
 
         // Escribimos a archivo temporal
         const fileStream = fs.createWriteStream(filePath);
+        console.log("Downloading image from:", currentUrl.href);
+        console.log("Saving to:", filePath);
         res.pipe(fileStream);
 
         fileStream.on("finish", () => {

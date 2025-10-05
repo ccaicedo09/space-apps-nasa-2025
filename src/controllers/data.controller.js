@@ -82,6 +82,7 @@ export const getData = async (req, res) => {
 
       if (!item.description_image) {
         const description = await generateDescriptionImg(item);
+        console.log("Generated description:", description);
         item.description_image = description;
         await item.save();
       }

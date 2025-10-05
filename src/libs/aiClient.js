@@ -8,15 +8,16 @@ const ai = new GoogleGenAI({
 })
 
 export const generateDescriptionImg = async (data) => {
-    const { mission, created_at, image_url, center } = data || {};
+    const { mission, created_at, thumbnail_url, center } = data || {};
     
     let base64 = "";
     let tempPath = null;
 
     try {
-        if (data.image_url) {
+        if (thumbnail_url) {
             try {
-                tempPath = await descargarImagenIgnorandoCertificado(image_url);
+                tempPath = await descargarImagenIgnorandoCertificado(thumbnail_url);
+                console.log("Image downloaded to:", tempPath);
                 base64 = await convertirImagenABase64(tempPath);
             } catch (err) {
                 console.error("Error al descargar/convertir imagen:", err);
