@@ -1,5 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
-import { descargarImagenIgnorandoCertificado, convertirImagenABase64 } from "./imageDownloader.js";
+import { descargarImagenIgnorandoCertificado, convertirImagenABase64 } from "../libs/imageDownloader.js";
 import fs from "fs";
 
 const ai = new GoogleGenAI({

@@ -39,6 +39,10 @@ const datasetSchema = new mongoose.Schema({
   center_longitude: {
     type: Number,
     default: null
+  },
+  description_image: {
+    type: String,
+    default: null
   }
 }, {
   timestamps: true
