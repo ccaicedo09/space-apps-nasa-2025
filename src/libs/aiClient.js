@@ -9,9 +9,10 @@ const ai = new GoogleGenAI({
 
 export const generateDescriptionImg = async (data) => {
     const { mission, created_at, thumbnail_url, center } = data || {};
-    
+
     let base64 = "";
     let tempPath = null;
+    let isTransformText = true;
 
     try {
         if (thumbnail_url) {
@@ -21,6 +22,7 @@ export const generateDescriptionImg = async (data) => {
                 base64 = await convertirImagenABase64(tempPath);
             } catch (err) {
                 console.error("Error al descargar/convertir imagen:", err);
+                isTransformText = false;
             } finally {
                 if (tempPath) {
                     try {
@@ -44,13 +46,22 @@ export const generateDescriptionImg = async (data) => {
             parts.push({
                 text: "No fue posible adjuntar la imagen por problemas de red/certificado. Procede solo con el texto."
             });
+            isTransformText = false;
         }
 
         parts.push({
-            text: `You are an expert space scientist. Explain the provided image in detail.
-            Use the following parameters: Mission: ${mission ?? "unknown"}, Created at: ${created_at ?? "unknown"}, Center Coordinates: ${center ?? "unknown"}.
-            Please explain concisely for a 5th grader.`
+            text: `You are a space science expert. Based on the visual information provided, write a short, clear description of what can be seen. 
+            Do not mention that you are describing an image or that the image was provided. 
+            Simply describe what is visible as if you were explaining it naturally.
+
+            Add relevant context using:
+            - Mission: ${mission ?? "unknown"}
+            - Created at: ${created_at ?? "unknown"}
+            - Center coordinates: ${center ?? "unknown"}
+
+            Keep the explanation concise, accurate, and easy for anyone to understand. Focus on what is visible and its scientific or historical relevance. Avoid unnecessary technical terms or phrases like "this image shows" or "the picture displays".`
         });
+
 
         const response = await ai.models.generateContent({
             model: "gemini-2.5-flash",
@@ -59,8 +70,8 @@ export const generateDescriptionImg = async (data) => {
 
         const text = typeof response.text === "function" ? await response.text() : response.text;
 
-        return text;
+        return { text, isTransformText };
     } catch (error) {
-        return error.message || "Error generating image description";
+        return { text: "Error while generating description", isTransformText: false };
     }
 }

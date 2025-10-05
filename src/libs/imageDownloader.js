@@ -23,7 +23,7 @@ function requestWithProtocol(u, options, onResponse) {
   return (u.protocol === "http:" ? http : https).get(u, options, onResponse);
 }
 
-export async function descargarImagenIgnorandoCertificado(url, maxRedirects = 5) {
+export async function descargarImagenIgnorandoCertificado(url, maxRedirects = 3) {
   return new Promise((resolve, reject) => {
     const startUrl = new URL(url);
     const filePath = path.join(tmpdir(), `imagen-${Date.now()}.jpg`);

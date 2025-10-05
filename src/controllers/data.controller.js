@@ -81,10 +81,10 @@ export const getData = async (req, res) => {
       console.log(item);
 
       if (!item.description_image) {
-        const description = await generateDescriptionImg(item);
+        const { text : description, isTransformText } = await generateDescriptionImg(item);
         console.log("Generated description:", description);
         item.description_image = description;
-        await item.save();
+        if (isTransformText) await item.save();
       }
     }
 
