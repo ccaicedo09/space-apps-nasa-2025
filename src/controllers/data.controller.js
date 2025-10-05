@@ -8,6 +8,7 @@ export const getData = async (req, res) => {
       created_at_from,
       created_at_to,
       title,
+      identifier,
       mission,
       center_latitude,
       center_longitude,
@@ -23,6 +24,10 @@ export const getData = async (req, res) => {
 
     if (title) {
       filters.title = { $regex: title, $options: "i" };
+    }
+
+    if (identifier) {
+      filters.identifier = { $regex: identifier, $options: "i" }
     }
 
     if (created_at_from || created_at_to || created_at) {
